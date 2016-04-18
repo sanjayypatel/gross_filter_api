@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json },
                   constraints: { subdomain: 'api' },
                   path: '/'  do
-    # Resources listed here
-  end
 
+    scope module: :v1 do
+      
+    end # module: :v1
+  end # namespace :api
 end
