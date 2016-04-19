@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 describe Api::V1::UsersController do
-  before(:each) { request.headers['Accept'] = "application/vnd.grossfilter.v1" }
 
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create :user
-      get :show, id: @user.id, format: :json
+      get :show, id: @user.id
     end
 
     it "returns the information about a reporter on a hash" do
@@ -21,7 +20,7 @@ describe Api::V1::UsersController do
     context "when it is successfully created" do
       before(:each) do
         @user_attrtibutes = FactoryGirl.attributes_for :user
-        post :create, {user: @user_attrtibutes }, format: :json
+        post :create, {user: @user_attrtibutes }
       end
 
       it "renders the json representation for the user record just created" do
@@ -36,7 +35,7 @@ describe Api::V1::UsersController do
       before(:each) do
         @invalid_user_attributes = { password: "12345678",
                                      password_confirmation: "12345678" }
-        post :create, { user: @invalid_user_attributes }, format: :json
+        post :create, { user: @invalid_user_attributes }
       end
 
       it "renders an errors json" do
